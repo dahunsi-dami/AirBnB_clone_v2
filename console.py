@@ -145,7 +145,7 @@ class HBNBCommand(cmd.Cmd):
             except ValueError:
                 pass
 
-            new_instance.__dict__[k] = v
+            setattr(new_instance, k, v)
         storage.save()
         print(new_instance.id)
 

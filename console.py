@@ -125,15 +125,14 @@ class HBNBCommand(cmd.Cmd):
             return
         """
 
-        argsl = args.split()[1:]
-        cargs = args.split()
-        if cargs[0] not in HBNBCommand.classes:
+        clsname, *argcoll = args.split(' ')
+        if clsname not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
 
-        new_instance = HBNBCommand.classes[cargs[0]]()
+        new_instance = HBNBCommand.classes[clsname]()
 
-        for pick in argsl[1:]:
+        for pick in argcoll:
             k, v = pick.split('=')
             v = v.strip('"').replace('_', ' ')
 

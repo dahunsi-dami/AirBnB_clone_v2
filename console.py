@@ -132,6 +132,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         new_instance = HBNBCommand.classes[cargs[0]]()
+
         for pick in argsl[1:]:
             k, v = pick.split('=')
             v = v.strip('"').replace('_', ' ')

@@ -136,6 +136,15 @@ class HBNBCommand(cmd.Cmd):
         for pick in argsl[1:]:
             k, v = pick.split('=')
             v = v.strip('"').replace('_', ' ')
+
+            try:
+                if '.' in v:
+                    v = float(v)
+                else:
+                    v = int(v)
+            except ValueError:
+                pass
+
             new_instance.__dict__[k] = v
         storage.save()
         print(new_instance.id)

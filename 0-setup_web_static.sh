@@ -3,8 +3,8 @@
 
 nginx_path="/etc/nginx/"
 data_folder="/data"
-#data_static="/data/web_static/"
-#data_releases="/data/web_static/releases/"
+data_static="/data/web_static/"
+data_releases="/data/web_static/releases/"
 data_shared="/data/web_static/shared/"
 data_test="/data/web_static/releases/test/"
 fake_html="/data/web_static/releases/test/index.html"
@@ -14,30 +14,31 @@ if [ ! -e "$nginx_path" ]; then
         sudo apt-get update
         sudo apt-get install nginx
 fi
-#check_file() {
-        #local path
-        #if [ -e "$path" ]; then
-                #echo "Path exists"
-                #exit 0
-        #else
-                #sudo(mkdir "$path")
-        #fi
-#}
+check_file() {
+        local path="$1"
+        if [ -e "$path" ]; then
+                echo "Path exists"
+                exit 0
+        else
+                sudo mkdir -p "$path"
+                exit 1
+        fi
+}
 sudo chown -R ubuntu:ubuntu "$data_folder"
 sudo chmod -R +x "$data_folder"
-#$(check_file "$data_folder")
-#$(check_file "$data_static")
-#$(check_file "$data_releases")
-#$(check_file "$data_shared")
-#$(check_file "$data_test")
-#echo "hello fake" | sudo tee "$(check_file "$fake_html")"
-echo "Yes fake html" | sudo tee "$fake_html"
-sudo mkdir -p "$data_test" "$data_shared"
-#if [ -L "$data_current" ]; then
-        #echo "symbolic link already exits"
-        #rm "$data_current"
-#fi
-sudo ln -sf "$data_test" "$data_current"
+check_file "$data_folder"
+check_file "$data_static"
+check_file "$data_releases"
+check_file "$data_shared"
+check_file "$data_test"
+echo "hello fake" | sudo tee "$(check_file "$fake_html")"
+#echo "Yes fake html" | sudo tee "$fake_html"
+#sudo mkdir -p "$data_test" "$data_shared"
+if [ -L "$data_current" ]; then
+        echo "symbolic link already exits"
+        rm "$data_current"
+fi
+sudo ln -s "$data_test" "$data_current"
 
 sudo sed -i '/server_name_;/a \\tlocation /hbnb_static/ {\n\t\t alias '"$data_current"';\n\t}' /etc/nginx/sites-available/default
 

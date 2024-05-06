@@ -41,7 +41,7 @@ echo "$html_content" | sudo tee "$fake_html"
 if [ -L "$data_current" ]; then
         sudo rm "$data_current"
 fi
-sudo ln -s "$data_test" "$data_current"
+sudo ln -sf "$data_test" "$data_current"
 
 sudo sed -i '/server_name_;/a \\tlocation /hbnb_static/ {\n\t\t alias '"$data_current"';\n\t}' /etc/nginx/sites-available/default
 

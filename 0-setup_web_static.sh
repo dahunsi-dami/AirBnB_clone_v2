@@ -28,13 +28,13 @@ sudo chown -R ubuntu:ubuntu /data/
 sudo chmod -R 755 /data/
 
 # Create fake content for index.html.
-sudo echo "<html>
+sudo bash -c 'echo "<html>
   <head>
   </head>
   </body>
     Holberton School
   </body>
-</html>" > /data/web_static/releases/test/index.html
+</html>" > /data/web_static/releases/test/index.html'
 
 # Create symbolic link /data/web_static/current
 # to /data/web_static/releases/test/

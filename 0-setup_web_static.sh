@@ -37,8 +37,8 @@ sudo echo "<html>
 </html>" > /data/web_static/releases/test/index.html
 
 # Create symbolic link /data/web_static/current
-# to /data/web_static/releases/text/
-sudo ln -sf /data/web_static/releases/text/ /data/web_static/current
+# to /data/web_static/releases/test/
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 # Serve content of /data/web_static/current/ to hbnb_static
 # using alias.

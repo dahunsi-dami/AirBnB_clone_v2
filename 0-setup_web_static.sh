@@ -16,12 +16,8 @@ if [ ! -e "$nginx_path" ]; then
 fi
 check_file() {
         local path="$1"
-        if [ -e "$path" ]; then
-                echo "Path exists"
-                exit 0
-        else
+        if [ ! -e "$path" ]; then
                 sudo mkdir -p "$path"
-                exit 1
         fi
 }
 sudo chown -R ubuntu:ubuntu "$data_folder"
@@ -43,4 +39,4 @@ sudo ln -s "$data_test" "$data_current"
 sudo sed -i '/server_name_;/a \\tlocation /hbnb_static/ {\n\t\t alias '"$data_current"';\n\t}' /etc/nginx/sites-available/default
 
 sudo service nginx restart
-echo "complete"
+exit 0

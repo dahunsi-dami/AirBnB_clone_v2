@@ -21,7 +21,7 @@ check_file() {
         fi
 }
 sudo chown -R "$USER:$USER" "$data_folder"
-sudo chmod -R +x "$data_folder"
+sudo find /data -type f -exec chmod +x {} \;
 check_file "$data_folder"
 check_file "$data_static"
 check_file "$data_releases"

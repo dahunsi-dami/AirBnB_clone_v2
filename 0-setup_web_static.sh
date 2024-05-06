@@ -12,7 +12,7 @@ data_current="/data/web_static/current"
 
 if [ ! -e "$nginx_path" ]; then
         sudo apt-get update
-        sudo apt-get install nginx
+        sudo apt-get install -y nginx
 fi
 check_file() {
         local path="$1"
@@ -21,7 +21,7 @@ check_file() {
         fi
 }
 sudo chown -R ubuntu:ubuntu "$data_folder"
-sudo find /data -type f -exec chmod +x {} \;
+sudo find "$data_folder" -type f -exec chmod +x {} \;
 check_file "$data_folder"
 check_file "$data_static"
 check_file "$data_releases"

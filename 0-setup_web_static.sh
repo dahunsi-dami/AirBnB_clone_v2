@@ -27,7 +27,14 @@ check_file "$data_static"
 check_file "$data_releases"
 check_file "$data_shared"
 check_file "$data_test"
-echo "hello fake" | sudo tee "$(check_file "$fake_html")"
+html_content='<html>
+        <head>
+        </head>
+        <body>
+                Holberton School
+        </body>
+</html>'
+echo "$html_content" > "$fake_html"
 #echo "Yes fake html" | sudo tee "$fake_html"
 #sudo mkdir -p "$data_test" "$data_shared"
 if [ -L "$data_current" ]; then

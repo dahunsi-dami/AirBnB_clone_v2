@@ -34,16 +34,16 @@ html_content='<html>
                 Holberton School
         </body>
 </html>'
-echo "$html_content" > "$fake_html"
+echo "$html_content" | sudo tee "$fake_html"
 #echo "Yes fake html" | sudo tee "$fake_html"
 #sudo mkdir -p "$data_test" "$data_shared"
 #if [ -L "$data_current" ]; then
         #echo "symbolic link already exits"
-        #rm "$data_current"
+        #sudo rm "$data_current"
 #fi
 sudo ln -sf "$data_test" "$data_current"
 
 sudo sed -i '/server_name_;/a \\tlocation /hbnb_static/ {\n\t\t alias '"$data_current"';\n\t}' /etc/nginx/sites-available/default
 
-nginx -s reload
+sudo nginx -s reload
 exit 0

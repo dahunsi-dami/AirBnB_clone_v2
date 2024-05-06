@@ -3,21 +3,18 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String
-import os
-
-storage_type = os.getenv("HBNB_TYPE_STORAGE")
 
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
 
     name = Column(String(128), nullable=False)
-
-    from models import storage
-    if storage.__class__.__name__ == 'DBStorage':
+    
+    if storage.__class.__name__ == 'DBStorage':
+        from models.__init__ import storage
         cities = relationship("City", cascade="all, delete", backref="state")
 
-    elif storage.__class__name == 'FileStorage':
+    elif storage.__class__name__ == 'FileStorage':
         @property
         def cities(self):
             """"""

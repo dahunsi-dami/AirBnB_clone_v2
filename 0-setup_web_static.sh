@@ -1,48 +1,48 @@
 #!/usr/bin/env bash
-# Write a Bash script that sets up your web servers for the deployment
+# Set up web servers for deployment of web_static
 
-nginx_path="/etc/nginx"
-data_folder="/data"
-data_static="$data_folder/web_static"
-data_releases="$data_static/releases"
-data_shared="$data_static/shared"
-data_test="$data_releases/test"
-fake_html="$data_test/index.html"
-data_current="$data_static/current"
+# Update the server.
+sudo apt-get update
 
-if [ ! -e "$nginx_path" ]; then
-        sudo apt-get update
-        sudo apt-get install -y nginx
-fi
-check_file() {
-        local path="$1"
-        if [ ! -e "$path" ]; then
-                sudo mkdir -p "$path"
-        fi
-}
-#sudo mkdir -p "$data_folder" "$data_static" "$dara_releases" "$data_shared" "$data_test"
-sudo chown -R ubuntu:ubuntu "$data_folder"
-sudo chmod -R +x "$data_folder"
-check_file "$data_folder"
-check_file "$data_static"
-check_file "$data_releases"
-check_file "$data_shared"
-check_file "$data_test"
-html_content='<html>
-        <head>
-        </head>
-        <body>
-                Holberton School
-        </body>
-</html>'
-echo "$html_content" | sudo tee "$fake_html"
-#echo "Yes fake html" | sudo tee "$fake_html"
-#sudo mkdir -p "$data_test" "$data_shared"
-if [ -L "$data_current" ]; then
-        sudo rm "$data_current"
-fi
-sudo ln -sf "$data_test" "$data_current"
+# Install Nginx with auto yes to all prompts.
+sudo apt-get -y install nginx
 
-sudo sed -i '/server_name_;/a \\tlocation /hbnb_static/ {\n\t\t alias '"$data_current"';\n\t}' /etc/nginx/sites-available/default
+# Allow incoming connections through SSH, port 80, and 443.
+sudo ufw allow 'OpenSSH'
+sudo ufw allow 'Nginx HTTP'
+sudo ufw allow 'Nginx HTTPS'
 
+# Create /data/web_static/releases/test/ as needed.
+sudo mkdir -p /data/web_static/releases/test/
+
+# Create /data/web_static/shared.
+sudo mkdir -p /data/web_static/shared/
+
+# Create index.html file in test directory.
+sudo touch /data/web_static/releases/test/index.html
+
+# Recursively assign ownership of data to user running script.
+sudo chown -R ubuntu:ubuntu /data/
+
+# Set permissions of files in /data to rwx for user, r-x for g:o.
+sudo chmod -R 755 /data/
+
+# Create fake content for index.html.
+sudo echo "<html>
+  <head>
+  </head>
+  </body>
+    Holberton School
+  </body>
+</html>" > /data/web_static/releases/test/index.html
+
+# Create symbolic link /data/web_static/current
+# to /data/web_static/releases/text/
+sudo ln -sf /data/web_static/releases/text/ /data/web_static/current
+
+# Serve content of /data/web_static/current/ to hbnb_static
+# using alias.
+sudo sed -i '/listen 80 default_server/a location /hbnb_static { alias /data/web_static/current/;}' /etc/nginx/sites-enabled/default
+
+# Restart Nginx after configuration.
 sudo service nginx restart

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Write a Bash script that sets up your web servers for the deployment
 
-nginx_path="/etc/nginx/"
+nginx_path="/etc/nginx"
 data_folder="/data"
-data_static="/data/web_static/"
-data_releases="/data/web_static/releases/"
-data_shared="/data/web_static/shared/"
-data_test="/data/web_static/releases/test/"
+data_static="/data/web_static"
+data_releases="/data/web_static/releases"
+data_shared="/data/web_static/shared"
+data_test="/data/web_static/releases/test"
 fake_html="/data/web_static/releases/test/index.html"
 data_current="/data/web_static/current"
 

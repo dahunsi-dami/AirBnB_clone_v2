@@ -20,7 +20,7 @@ check_file() {
                 sudo mkdir -p "$path"
         fi
 }
-sudo chown -R ubuntu:ubuntu "$data_folder"
+sudo chown -R "$USER:$USER" "$data_folder"
 sudo chmod -R +x "$data_folder"
 check_file "$data_folder"
 check_file "$data_static"

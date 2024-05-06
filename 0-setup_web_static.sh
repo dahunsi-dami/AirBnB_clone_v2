@@ -14,20 +14,20 @@ if [ ! -e "$nginx_path" ]; then
         sudo apt-get update
         sudo apt-get install -y nginx
 fi
-#check_file() {
-        #local path="$1"
-        #if [ ! -e "$path" ]; then
-                #sudo mkdir -p "$path"
-        #fi
-#}
-sudo mkdir -p "$data_folder" "$data_static" "$dara_releases" "$data_shared" "$data_test"
+check_file() {
+        local path="$1"
+        if [ ! -e "$path" ]; then
+                sudo mkdir -p "$path"
+        fi
+}
+#sudo mkdir -p "$data_folder" "$data_static" "$dara_releases" "$data_shared" "$data_test"
 sudo chown -R ubuntu:ubuntu "$data_test"
 sudo chmod -R 755 "$data_test"
-#check_file "$data_folder"
-#check_file "$data_static"
-#check_file "$data_releases"
-#check_file "$data_shared"
-#check_file "$data_test"
+check_file "$data_folder"
+check_file "$data_static"
+check_file "$data_releases"
+check_file "$data_shared"
+check_file "$data_test"
 html_content='<html>
         <head>
         </head>

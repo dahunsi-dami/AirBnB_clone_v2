@@ -46,4 +46,3 @@ sudo ln -s "$data_test" "$data_current"
 sudo sed -i '/server_name_;/a \\tlocation /hbnb_static/ {\n\t\t alias '"$data_current"';\n\t}' /etc/nginx/sites-available/default
 
 sudo service nginx restart
-exit 0

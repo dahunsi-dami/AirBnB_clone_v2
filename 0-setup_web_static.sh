@@ -22,6 +22,7 @@ fi
 #}
 sudo mkdir -p "$data_folder" "$data_static" "$dara_releases" "$data_shared" "$data_test"
 sudo chown -R ubuntu:ubuntu "$data_folder"
+sudo chmod -R -x "$data_static"
 sudo find "$data_folder" -type f -exec chmod +x {} \;
 #check_file "$data_folder"
 #check_file "$data_static"

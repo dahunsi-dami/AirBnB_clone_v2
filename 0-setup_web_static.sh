@@ -25,7 +25,7 @@ sudo touch /data/web_static/releases/test/index.html
 sudo chown -R ubuntu:ubuntu /data/
 
 # Set permissions of files in /data to rwx for user, r-x for g:o.
-sudo chmod -R 755 /data/
+sudo chmod -R 755 /data/web_static/releases/test/
 
 # Create fake content for index.html.
 sudo bash -c 'echo "<html>

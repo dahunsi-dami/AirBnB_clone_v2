@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Login fasttrack for server 2
+
+ssh ubuntu@3.89.155.105 -i ~/.ssh/school

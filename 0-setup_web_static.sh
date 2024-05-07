@@ -22,7 +22,7 @@ sudo mkdir -p /data/web_static/shared/
 sudo touch /data/web_static/releases/test/index.html
 
 # Recursively assign ownership of data to user running script.
-sudo chown -R ubuntu:ubuntu /data/
+# sudo chown -R ubuntu:ubuntu /data/
 
 # Set permissions of files in /data to rwx for user, r-x for g:o.
 sudo chmod -R 755 /data/web_static/releases/test/
@@ -39,6 +39,9 @@ sudo bash -c 'echo "<html>
 # Create symbolic link /data/web_static/current
 # to /data/web_static/releases/test/
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
+
+# Recursively assign ownership of data to user running script.
+sudo chown -R ubuntu:ubuntu /data/
 
 # Serve content of /data/web_static/current/ to hbnb_static
 # using alias.

@@ -28,8 +28,9 @@ def c_text(text):
     return f'C {text}'
 
 
+@app.route("/python/", defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
-def python_text(text="is cool"):
+def python_text(text):
     """
     Displays Python and value of text variable,
     and replace underscore in text with space.
